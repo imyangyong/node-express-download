@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/project.css')
+  body
+    script(src="/javascripts/index.js")
+      script
+    canvas#sakura(width='100vw',height='100vh')
+
+    block content
+    script(src='/javascripts/background.js')

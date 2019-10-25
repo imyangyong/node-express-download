@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    canvas#sakura(width='100vw',height='100vh')
+    p.project-title
+        a 蓝光BRC
+    div.project-container
+        div.item
+            h3 declare-react.zip
+            a(href='/brc/declare-react')
+                button(id='declare-react') download
+            p
+                span 最近更新时间：
+                span= fileModifiedDate.declareReact
+        div.item
+            h3 declare-vue.zip
+            a(href='/brc/declare-vue')
+                button(id='declare-vue') download
+            p
+                span 最近更新时间：
+                span= fileModifiedDate.declareVue
+        div.item
+            h3 configure.zip
+            a(href='/brc/configure')
+                button(id='configure') download
+            p
+                span 最近更新时间：
+                span= fileModifiedDate.configure
+
