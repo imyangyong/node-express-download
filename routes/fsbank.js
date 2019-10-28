@@ -8,7 +8,7 @@ const { downloadFile, errorTips, fileModifiedDate } = require('../utils');
 /* GET users listing. */
 fsbank.get('/', function(req, res, next) {
   Promise.all([
-    fileModifiedDate(process.cwd() + '/resources/brc/declare-react.zip'),
+    fileModifiedDate(process.cwd() + '/resources/fsbank/declare-react.zip'),
   ]).then(([declareReact, declareVue, configure]) => {
     res.render('project', {
       title: '抚顺银行',
