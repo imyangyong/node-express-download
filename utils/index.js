@@ -51,7 +51,6 @@ function fileModifiedDate(url, res) {
   return new Promise((resolve, reject) => {
     fs.stat(url, function (err, stat) {
       if (err) {
-        errorTips(err, res);
         reject(err);
         return;
       }

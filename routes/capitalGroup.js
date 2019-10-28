@@ -2,20 +2,20 @@ var express = require('express');
 var fs = require('fs');
 var mime = require('mime');
 var path = require('path');
-var fsbank = express.Router();
+var capitalGroup = express.Router();
 const { downloadFile, errorTips, fileModifiedDate } = require('../utils');
 
 /* GET users listing. */
-fsbank.get('/', function(req, res, next) {
+capitalGroup.get('/', function(req, res, next) {
   Promise.all([
-    fileModifiedDate(process.cwd() + '/resources/fsbank/declare-react.zip'),
+    fileModifiedDate(process.cwd() + '/resources/capitalGroup/declare-react.zip'),
   ]).then(([declareReact, declareVue, configure]) => {
     res.render('project', {
-      title: '抚顺银行',
+      title: '首都创业',
       fileList: [
         {
           name: 'declare-react.zip',
-          url: '/fsbank/declare-react',
+          url: '/capitalGroup/declare-react',
           lastModified: declareReact,
         },
       ]
@@ -28,8 +28,8 @@ fsbank.get('/', function(req, res, next) {
   });
 });
 
-fsbank.get('/declare-react', function (req, res, next) {
-  var filePath = process.cwd() + '/resources/fsbank/declare-react.zip';
+capitalGroup.get('/declare-react', function (req, res, next) {
+  var filePath = process.cwd() + '/resources/capitalGroup/declare-react.zip';
   fs.stat(filePath, function (err, stat) {
     if (err) {
       errorTips(err, res);
@@ -39,4 +39,4 @@ fsbank.get('/declare-react', function (req, res, next) {
   })
 });
 
-module.exports = fsbank;
+module.exports = capitalGroup;

@@ -31,7 +31,12 @@ brc.get('/', function(req, res, next) {
         },
       ]
     });
-  })
+  }).catch(e => {
+    res.render('project', {
+      title: '暂无文件',
+      fileList: [],
+    });
+  });
   
 });
 
