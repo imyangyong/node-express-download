@@ -12,12 +12,24 @@ brc.get('/', function(req, res, next) {
     fileModifiedDate(process.cwd() + '/resources/brc/declare-vue.zip'),
     fileModifiedDate(process.cwd() + '/resources/brc/configure.zip'),
   ]).then(([declareReact, declareVue, configure]) => {
-    res.render('brc', {
-      fileModifiedDate: {
-        declareReact,
-        declareVue,
-        configure,
-      }
+    res.render('project', {
+      title: '蓝光BRC',
+      fileList: [
+        {
+          name: 'declare-react.zip',
+          url: '/brc/declare-react',
+          lastModified: declareReact,
+        },
+        {
+          name: 'declare-vue.zip',
+          url: '/brc/declare-vue',
+          lastModified: declareVue,
+        },{
+          name: 'configure.zip',
+          url: '/brc/configure',
+          lastModified: configure,
+        },
+      ]
     });
   })
   

@@ -23,7 +23,7 @@ body {
   margin: 0 auto;
   flex-direction: column;
   max-width: 600px;
-  background: #005E9B;
+  background: #fff;
   flex-basis: 250px;
   color: white;
   padding: 2em;
@@ -62,6 +62,5 @@ li {
   min-height: 200px;
   position:relative;
   display: inline-block;
-  background: -webkit-gradient(linear, 0% 20%, 0% 1000%, from(rgba(255,255,255,0.1)), to(rgba(255,255,255,0.1)), color-stop(.1,#f3f3f3));  -webkit-box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.1) inset;
   -webkit-border-bottom-right-radius: 6px 50px;
 }
