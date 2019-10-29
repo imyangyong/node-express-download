@@ -105,10 +105,14 @@
   color: #555;
 }
 
-.project-container p span {
+.project-container p span:nth-child(1) {
   font-size: 13px;
   display: inline-block;
   color: #333;
+}
+
+.project-container p span:nth-child(2) {
+  color: #fff;
 }
 
 .project-container p span:nth-child(1) {
