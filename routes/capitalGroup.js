@@ -3,22 +3,18 @@ var fs = require('fs');
 var mime = require('mime');
 var path = require('path');
 var capitalGroup = express.Router();
-const { downloadFile, errorTips, fileModifiedDate } = require('../utils');
+const { downloadFile, errorTips, readFile } = require('../utils');
 
 /* GET users listing. */
 capitalGroup.get('/', function(req, res, next) {
   Promise.all([
-    fileModifiedDate(process.cwd() + '/resources/capitalGroup/declare-react.zip'),
-  ]).then(([declareReact, declareVue, configure]) => {
+    readFile('declare-react.zip', 'capitalGroup'),
+    readFile('declare-vue.zip', 'capitalGroup'),
+    readFile('configure.zip', 'capitalGroup'),
+  ]).then(([...files]) => {
     res.render('project', {
       title: '首都创业',
-      fileList: [
-        {
-          name: 'declare-react.zip',
-          url: '/capitalGroup/declare-react',
-          lastModified: declareReact,
-        },
-      ]
+      fileList: files.filter(file => file),
     });
   }).catch(e => {
     res.render('project', {

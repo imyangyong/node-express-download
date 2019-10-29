@@ -3,22 +3,18 @@ var fs = require('fs');
 var mime = require('mime');
 var path = require('path');
 var fsbank = express.Router();
-const { downloadFile, errorTips, fileModifiedDate } = require('../utils');
+const { downloadFile, errorTips, readFile } = require('../utils');
 
 /* GET users listing. */
 fsbank.get('/', function(req, res, next) {
   Promise.all([
-    fileModifiedDate(process.cwd() + '/resources/fsbank/declare-react.zip'),
-  ]).then(([declareReact, declareVue, configure]) => {
+    readFile('declare-react.zip', 'fsbank'),
+    readFile('declare-vue.zip', 'fsbank'),
+    readFile('configure.zip', 'fsbank'),
+  ]).then(([...files]) => {
     res.render('project', {
       title: '抚顺银行',
-      fileList: [
-        {
-          name: 'declare-react.zip',
-          url: '/fsbank/declare-react',
-          lastModified: declareReact,
-        },
-      ]
+      fileList: files.filter(file => file),
     });
   }).catch(e => {
     res.render('project', {

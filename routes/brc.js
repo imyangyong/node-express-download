@@ -3,33 +3,18 @@ var fs = require('fs');
 var mime = require('mime');
 var path = require('path');
 var brc = express.Router();
-const { downloadFile, errorTips, fileModifiedDate } = require('../utils');
+const { downloadFile, errorTips, readFile } = require('../utils');
 
 /* GET users listing. */
 brc.get('/', function(req, res, next) {
   Promise.all([
-    fileModifiedDate(process.cwd() + '/resources/brc/declare-react.zip'),
-    fileModifiedDate(process.cwd() + '/resources/brc/declare-vue.zip'),
-    fileModifiedDate(process.cwd() + '/resources/brc/configure.zip'),
-  ]).then(([declareReact, declareVue, configure]) => {
+    readFile('declare-react.zip', 'brc'),
+    readFile('declare-vue.zip', 'brc'),
+    readFile('configure.zip', 'brc'),
+  ]).then(([...files]) => {
     res.render('project', {
       title: '蓝光BRC',
-      fileList: [
-        {
-          name: 'declare-react.zip',
-          url: '/brc/declare-react',
-          lastModified: declareReact,
-        },
-        {
-          name: 'declare-vue.zip',
-          url: '/brc/declare-vue',
-          lastModified: declareVue,
-        },{
-          name: 'configure.zip',
-          url: '/brc/configure',
-          lastModified: configure,
-        },
-      ]
+      fileList: files.filter(file => file),
     });
   }).catch(e => {
     res.render('project', {
@@ -37,7 +22,6 @@ brc.get('/', function(req, res, next) {
       fileList: [],
     });
   });
-  
 });
 
 brc.get('/declare-react', function (req, res, next) {

@@ -42,19 +42,24 @@ function applyDate() {
 
 /**
  * method get file modified date.
- * @param {String} url File path in the computer.
- * @param {Object} res Http response.
- * @return {Date} return Date.
+ * @param {String} filename File name.
+ * @param {String} project Project to resolve.
+ * @return {Object} return File info.
  */
-function fileModifiedDate(url, res) {
+function readFile(filename, project) {
   applyDate();
   return new Promise((resolve, reject) => {
+    const url = `${process.cwd()}/resources/${project}/${filename}`;
     fs.stat(url, function (err, stat) {
       if (err) {
-        reject(err);
+        resolve(null);
         return;
       }
-      resolve(new Date(stat.mtime).format("yyyy-MM-dd hh:mm:ss"))
+      resolve({
+        name: filename,
+        url,
+        lastModified: new Date(stat.mtime).format("yyyy-MM-dd hh:mm:ss")
+      })
     })
   });
 }
@@ -73,5 +78,5 @@ function errorTips(err, res) {
 module.exports = {
   downloadFile,
   errorTips,
-  fileModifiedDate,
+  readFile,
 }
