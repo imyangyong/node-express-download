@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: '全税研发部前端资源系统' });
+  res.render('index', { title: '前端项目资源' });
 });
 
 module.exports = router;
