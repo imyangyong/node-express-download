@@ -57,7 +57,7 @@ function readFile(filename, project) {
       }
       resolve({
         name: filename,
-        url,
+        url: `${project}/${filename.replace(/\..*/, '')}`,
         lastModified: new Date(stat.mtime).format("yyyy-MM-dd hh:mm:ss")
       })
     })
