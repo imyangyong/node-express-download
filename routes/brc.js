@@ -11,6 +11,7 @@ brc.get('/', function(req, res, next) {
     readFile('declare-react.zip', 'brc'),
     readFile('declare-vue.zip', 'brc'),
     readFile('configure.zip', 'brc'),
+    readFile('statistic.zip', 'brc'),
   ]).then(([...files]) => {
     res.render('project', {
       title: '蓝光BRC',
@@ -48,6 +49,17 @@ brc.get('/declare-vue', function (req, res, next) {
 
 brc.get('/configure', function (req, res, next) {
   var filePath = process.cwd() + '/resources/brc/configure.zip';
+  fs.stat(filePath, function (err, stat) {
+    if (err) {
+      errorTips(err, res);
+      return;
+    }
+    downloadFile(filePath, res);
+  })
+});
+
+brc.get('/statistic', function (req, res, next) {
+  var filePath = process.cwd() + '/resources/brc/statistic.zip';
   fs.stat(filePath, function (err, stat) {
     if (err) {
       errorTips(err, res);
