@@ -41,39 +41,33 @@ function applyDate() {
 }
 
 /**
- * method get file modified date.
- * @param {String} filename File name.
+ * method get file & modified date.
  * @param {String} project Project to resolve.
  * @return {Object} return File info.
  */
-function readFile(filename, project) {
-  applyDate();
-  return new Promise((resolve, reject) => {
-    const url = `${process.cwd()}/resources/${project}/${filename}`;
-    fs.stat(url, function (err, stat) {
-      if (err) {
-        resolve(null);
-        return;
-      }
-      resolve({
-        name: filename,
-        url: `${project}/${filename.replace(/\..*/, '')}`,
-        lastModified: new Date(stat.mtime).format("yyyy-MM-dd hh:mm:ss")
-      })
-    })
-  });
+function readFile(project) {
+  const files = fs.readdirSync(`${process.cwd()}/resources/${project}`);
+  return files.map(filename => {
+    const fileStat = fs.statSync(path.resolve(`${process.cwd()}/resources${project}`, './' + filename));
+    return {
+      name: filename,
+      url: `${project}/${filename}`,
+      lastModified: new Date(fileStat.mtime).format("yyyy-MM-dd hh:mm:ss")
+    }
+  })
 }
 
 /**
  * method error.
- * @param {String} err Error message.
  * @param {Object} res Http response.
  */
-function errorTips(err, res) {
+function errorTips(res) {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.writeHead(200);
   res.end('暂无文件');
 }
+
+applyDate();
 
 module.exports = {
   downloadFile,

@@ -8,11 +8,8 @@ block content
 
     div.profile-position
       ul
-        li
-          a(href='/brc')= "蓝光brc"
-        li
-          a(href='/fsbank')= "抚顺银行"
-        li
-          a(href='/capitalGroup')= "首都创业"
+        each item in resources
+          li
+            a(href=item.url)=item.name
 
 
