@@ -11,7 +11,7 @@ project.get(/.*/, function(req, res, next) {
   if (baseUrl.match(/\//g).length < 2) {
     const files = readFile(baseUrl)
     res.render('project', {
-      title: baseUrl.split('-')[1],
+      title: baseUrl.replace('/', ''),
       fileList: files,
     });
   } else {

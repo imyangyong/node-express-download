@@ -7,11 +7,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var projectRouter = require('./routes/project');
-// var usersRouter = require('./routes/users');
-// var brcRouter = require('./routes/brc');
-// var fsRouter = require('./routes/fsbank');
-// var capitalGroupRouter = require('./routes/capitalGroup');
-// var zhengtongRouter = require('./routes/zhengtong');
+var uploadRouter = require('./routes/upload');
+var deleteRouter = require('./routes/delete');
 
 /**
  * method 获取project资源列表.
@@ -21,10 +18,9 @@ function getResources() {
   let resources = fs.readdirSync(path.resolve(__dirname, 'resources'));
   return resources.map(file => ({
     url: file,
-    name: file.split('-')[1]
+    name: file
   }))
 }
-
 
 var app = express();
 
@@ -39,6 +35,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter(getResources()));
+app.use('/upload', uploadRouter);
+app.use('/delete', deleteRouter);
 app.use('/', projectRouter);
 
 // catch 404 and forward to error handler
