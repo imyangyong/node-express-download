@@ -8,6 +8,10 @@ var formidable = require('formidable')
 
 upload.post('/', function(req, res, next) {
   var form = new formidable.IncomingForm();
+  
+  // max size set 100mb
+  form.maxFieldsSize = 100 * 1024 * 1024;
+  
   form.parse(req, function(err, fields, files) {
     if (err) {
       
