@@ -10,18 +10,6 @@ var projectRouter = require('./routes/project');
 var uploadRouter = require('./routes/upload');
 var deleteRouter = require('./routes/delete');
 
-/**
- * method 获取project资源列表.
- * @return {Array} return 列表.
- */
-function getResources() {
-  let resources = fs.readdirSync(path.resolve(__dirname, 'resources'));
-  return resources.map(file => ({
-    url: file,
-    name: file
-  }))
-}
-
 var app = express();
 
 // view engine setup
@@ -34,7 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter(getResources()));
+app.use('/', indexRouter);
 app.use('/upload', uploadRouter);
 app.use('/delete', deleteRouter);
 app.use('/', projectRouter);
