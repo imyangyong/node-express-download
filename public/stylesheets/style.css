@@ -10,6 +10,9 @@ body {
   place-items: center;
   background-color: #ffe;
   overflow: hidden;
+  background-image: url("../images/background.jpg");
+  background-position: center;
+  background-size: cover;
 }
 
 #sakura{
@@ -60,6 +63,7 @@ li {
   margin: 20px;
   padding: 10px;
   min-height: 200px;
+  opacity: 0.8;
   position:relative;
   display: inline-block;
   -webkit-border-bottom-right-radius: 6px 50px;
