@@ -21,6 +21,7 @@
 }
 
 .item{
+  position: relative;
   width: 300px;
   height: 200px;
   text-align: center;
@@ -116,5 +117,17 @@
 }
 
 .project-container p span:nth-child(1) {
-  margin: 40px 0;
+  margin: 20px 0;
+}
+
+.project-container .copy {
+  cursor: pointer;
+  font-size: 13px;
+  display: block;
+  margin-top: 10px;
+}
+
+.disabled {
+  pointer-events: none;
+  color: #bbbbbb;
 }

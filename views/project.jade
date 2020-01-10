@@ -9,6 +9,7 @@ block content
                 h3=item.name
                 a(href=item.url)
                     button download
+                a(id=item.name.replace(/\..*/, '') onclick='copyTextToClipboard("' + item.url +'", "'+ item.name.replace(/\..*/, '') +'")').copy 复制链接
                 p
                     span 最近更新时间：
                     span= item.lastModified
